@@ -1,30 +1,44 @@
 import React from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const carouselSettings = {
-  dots: true,
-  infinite: true,
-  speed: 300,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-};
-
-const Carousel = ({ coctailPhotos }) => {
+const CarouselComponent = ({ photoArray }) => {
   return (
-    <div className="items-center justify-center p-12">
-      <Slider {...carouselSettings}>
-        {coctailPhotos.map((photosUrl) => {
+    <div className="flex justify-center items-center w-2/3 h-auto mt-32 mb-16 rounded-md">
+      <Carousel
+        showArrows={true}
+        showIndicators={false}
+        infiniteLoop={true}
+        showThumbs={false}
+        autoPlay={true}
+        interval={3000}
+        transitionTime={500}
+        showStatus={false}
+      >
+        {photoArray.map((photoUrl) => {
           return (
-            <div>
-              <img src={photosUrl} className="m-auto" />
+            <div className="flex">
+              <img
+                src={photoUrl[0]}
+                alt="Carousel 1"
+                className="w-auto h-72 rounded-lg ml-2 mr-2"
+              />
+              <img
+                src={photoUrl[1]}
+                alt="Carousel 1"
+                className="w-auto h-72 rounded-lg ml-2 mr-2"
+              />
+              <img
+                src={photoUrl[2]}
+                alt="Carousel 1"
+                className="w-auto h-72 rounded-lg ml-2 mr-2"
+              />
             </div>
           );
         })}
-      </Slider>
+      </Carousel>
     </div>
   );
 };
 
-export default Carousel;
+export default CarouselComponent;
