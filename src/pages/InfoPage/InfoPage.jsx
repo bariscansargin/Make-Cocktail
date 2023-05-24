@@ -5,6 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 import Carousel from "../../components/Carousel/Carousel";
 //Utils
 import coctailCarouselPhotos from "../../utils/get-photo-array";
+import { Link} from "react-router-dom";
+//Emoji
+const emoji = String.fromCodePoint(0x1f60a);
+
 const InfoPage = () => {
   async function getImages() {
     try {
@@ -42,7 +46,19 @@ const InfoPage = () => {
         You can learn how to make cocktail in this website.{" "}
       </h3>
 
-      <Carousel photoArray={coctailCarouselPhotos}/>
+      <Carousel photoArray={coctailCarouselPhotos} />
+      <p className="italic text-teal-900 mb-24">
+        Only a few the cocktails you can learn to make !
+      </p>
+      <p> If you want you can filter cocktails here {emoji}</p>
+      <div className="flex">
+        <Link className="m-8 border-solid bg-green-900 p-2 rounded-lg text-white">
+          Alcoholic
+        </Link>
+        <Link className="m-8 border-solid bg-red-600 p-2 text-center rounded-lg text-white">
+          Non-Alcoholic
+        </Link>
+      </div>
     </main>
   );
 };
