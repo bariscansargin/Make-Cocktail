@@ -6,9 +6,9 @@ import Footer from "../../components/Footer/Footer";
 const HomePageLayout = () => {
   return (
     <Fragment>
-      <Navbar></Navbar>
-      <Outlet></Outlet>
-      <Footer></Footer>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </Fragment>
   );
 };
