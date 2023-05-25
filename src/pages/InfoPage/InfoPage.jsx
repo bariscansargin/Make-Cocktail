@@ -12,6 +12,7 @@ import cocktailCarouselPhotos from "../../utils/get-photo-array";
 import Carousel from "../../components/Carousel/Carousel";
 import SmallCocktailCard from "../../components/SmallCocktailCard/SmallCocktailCard";
 import ButtonComponent from "../../components/Button/ButtonComponent";
+import ResultCard from "../../components/ResultCard/ResultCard";
 //Emojis
 const emoji = String.fromCodePoint(0x1f60a);
 
@@ -20,8 +21,7 @@ const InfoPage = () => {
   const { knownCocktails, unknownCocktails } = useSelector(
     (state) => state.users
   );
-  const [refetchCount, setRefetchCount] = useState(0);
-  console.log("Counter = " + refetchCount);
+
   async function getRandomCocktail() {
     try {
       const res = await axios.get(
@@ -35,7 +35,7 @@ const InfoPage = () => {
   async function refetchHandler(query, buttonValue) {
     await randomCocktailQuery.refetch();
     const { idDrink, strDrink } = query.data.drinks[0];
-    setRefetchCount((current) => current + 1);
+
     if (buttonValue === "known") {
       dispatch(userActions.incrementKnownCocktails({ idDrink, strDrink }));
     } else {
@@ -66,14 +66,34 @@ const InfoPage = () => {
         Only a few the cocktails you can learn to make !
       </p>
 
-      {randomCocktailQuery.data && (
-        <SmallCocktailCard
-          cocktail={randomCocktailQuery.data.drinks[0]}
-          clickHandler={(buttonValue) => {
-            refetchHandler(randomCocktailQuery, buttonValue);
+      <div className="flex">
+        <ResultCard
+          title={"Known Cocktails"}
+          tableType={"known"}
+          knownArray={knownCocktails}
+          coctails={{
+            result: knownCocktails.length,
+            total: knownCocktails.length + unknownCocktails.length,
           }}
         />
-      )}
+        {randomCocktailQuery.data && (
+          <SmallCocktailCard
+            cocktail={randomCocktailQuery.data.drinks[0]}
+            clickHandler={(buttonValue) => {
+              refetchHandler(randomCocktailQuery, buttonValue);
+            }}
+          />
+        )}
+
+        <ResultCard
+          title={"Unknown Cocktails"}
+          unknownArray={unknownCocktails}
+          coctails={{
+            result: unknownCocktails.length,
+            total: knownCocktails.length + unknownCocktails.length,
+          }}
+        />
+      </div>
 
       <p> If you want you can filter cocktails here {emoji}</p>
 

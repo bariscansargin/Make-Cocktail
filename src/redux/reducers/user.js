@@ -6,7 +6,7 @@ const userSlice = createSlice({
   reducers: {
     incrementKnownCocktails(state, action) {
       const controlArray = state.knownCocktails.filter((cocktail) => {
-        return cocktail.id === action.payload.drinkId;
+        return cocktail.idDrink === action.payload.idDrink;
       });
       if (controlArray.length === 0) {
         state.knownCocktails = [...state.knownCocktails, action.payload];
@@ -14,7 +14,7 @@ const userSlice = createSlice({
     },
     incrementUnknownCocktails(state, action) {
       const controlArray = state.unknownCocktails.filter((cocktail) => {
-        return cocktail.id === action.payload.drinkId;
+        return cocktail.id === action.payload.idDrink;
       });
       if (controlArray.length === 0) {
         state.unknownCocktails = [...state.unknownCocktails, action.payload];
