@@ -1,2 +1,2 @@
-# MakeCoctail
- Make Coctail Website
+# Makecocktail
+ Make cocktail Website

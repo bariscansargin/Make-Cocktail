@@ -1,4 +1,4 @@
-const coctailCarouselPhotos = [
+const cocktailCarouselPhotos = [
   [
     "https://www.thecocktaildb.com/images/media/drink/125w0o1630407389.jpg/preview",
     "https://www.thecocktaildb.com/images/media/drink/wsyvrt1468876267.jpg/preview",
@@ -16,4 +16,4 @@ const coctailCarouselPhotos = [
   ],
 ];
 
-export default coctailCarouselPhotos;
+export default cocktailCarouselPhotos;
