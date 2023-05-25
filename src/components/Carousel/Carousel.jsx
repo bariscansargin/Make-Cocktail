@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const CarouselComponent = ({ photoArray }) => {
   return (
-    <div className="flex justify-center items-center w-2/3 h-72 h-auto mt-32 mb-16 rounded-md">
+    <div className="flex justify-center items-center w-2/3 h-auto mt-32 mb-16 rounded-md">
       <Carousel
         showArrows={true}
         showIndicators={false}
