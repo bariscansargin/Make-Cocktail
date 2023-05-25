@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^5.0.0-alpha.35",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
@@ -17,6 +18,7 @@
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.2",
     "sort-by": "^1.2.0"
