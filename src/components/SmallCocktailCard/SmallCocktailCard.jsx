@@ -11,19 +11,27 @@ const SmallCocktailCard = ({ cocktail, info, clickHandler }) => {
         src={cocktail.strDrinkThumb}
         alt="cocktail-photo"
       />
-      <p className="mb-4">{cocktail.strDrink}({cocktail.strAlcoholic})</p>
+      <p className="mb-4">
+        {cocktail.strDrink}({cocktail.strAlcoholic})
+      </p>
       <div className="flex mt-4 ">
         <Link>
           <ButtonComponent
             type={"green"}
             position={"w-12"}
             clickHandler={clickHandler}
+            value={"known"}
           >
             &#x2713;
           </ButtonComponent>
         </Link>
         <Link>
-          <ButtonComponent type={"red"} position={"ml-8  w-12 "}>
+          <ButtonComponent
+            type={"red"}
+            position={"ml-8  w-12 "}
+            value={"unknown"}
+            clickHandler={clickHandler}
+          >
             &times;
           </ButtonComponent>
         </Link>

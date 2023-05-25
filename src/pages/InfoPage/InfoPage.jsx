@@ -1,35 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../redux/reducers/user";
+//TanstackQuery
 import { useQuery } from "@tanstack/react-query";
+//Utils
+import cocktailCarouselPhotos from "../../utils/get-photo-array";
 //Components
 import Carousel from "../../components/Carousel/Carousel";
-//Utils
-import coctailCarouselPhotos from "../../utils/get-photo-array";
-import { Link} from "react-router-dom";
-//Emoji
+import SmallCocktailCard from "../../components/SmallCocktailCard/SmallCocktailCard";
+import ButtonComponent from "../../components/Button/ButtonComponent";
+//Emojis
 const emoji = String.fromCodePoint(0x1f60a);
 
 const InfoPage = () => {
-  async function getImages() {
-    try {
-      const res = await axios.get();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  async function getRandomCoctail() {
+  const dispatch = useDispatch();
+  const { knownCocktails, unknownCocktails } = useSelector(
+    (state) => state.users
+  );
+  const [refetchCount, setRefetchCount] = useState(0);
+  console.log("Counter = " + refetchCount);
+  async function getRandomCocktail() {
     try {
       const res = await axios.get(
         "https://www.thecocktaildb.com/api/json/v1/1/random.php"
       );
       return res.data;
-    } catch (error) {}
-    console.error(error);
+    } catch (error) {
+      console.error(error);
+    }
   }
-
-  const randomCoctailQuery = useQuery({
-    queryKey: ["random-coctail"],
-    queryFn: getRandomCoctail,
+  async function refetchHandler(query, buttonValue) {
+    await randomCocktailQuery.refetch();
+    const { idDrink, strDrink } = query.data.drinks[0];
+    setRefetchCount((current) => current + 1);
+    if (buttonValue === "known") {
+      dispatch(userActions.incrementKnownCocktails({ idDrink, strDrink }));
+    } else {
+      dispatch(userActions.incrementUnknownCocktails({ idDrink, strDrink }));
+    }
+  }
+  const randomCocktailQuery = useQuery({
+    queryKey: ["random-cocktail"],
+    queryFn: getRandomCocktail,
   });
 
   return (
@@ -46,17 +61,30 @@ const InfoPage = () => {
         You can learn how to make cocktail in this website.{" "}
       </h3>
 
-      <Carousel photoArray={coctailCarouselPhotos} />
+      <Carousel photoArray={cocktailCarouselPhotos} />
       <p className="italic text-teal-900 mb-24">
         Only a few the cocktails you can learn to make !
       </p>
+
+      {randomCocktailQuery.data && (
+        <SmallCocktailCard
+          cocktail={randomCocktailQuery.data.drinks[0]}
+          clickHandler={(buttonValue) => {
+            refetchHandler(randomCocktailQuery, buttonValue);
+          }}
+        />
+      )}
+
       <p> If you want you can filter cocktails here {emoji}</p>
-      <div className="flex">
-        <Link className="m-8 border-solid bg-green-900 p-2 rounded-lg text-white">
-          Alcoholic
+
+      <div className="flex mt-6">
+        <Link>
+          <ButtonComponent type={"green"}>Alcoholic</ButtonComponent>
         </Link>
-        <Link className="m-8 border-solid bg-red-600 p-2 text-center rounded-lg text-white">
-          Non-Alcoholic
+        <Link>
+          <ButtonComponent type={"red"} position="ml-4">
+            Non-Alcoholic
+          </ButtonComponent>
         </Link>
       </div>
     </main>

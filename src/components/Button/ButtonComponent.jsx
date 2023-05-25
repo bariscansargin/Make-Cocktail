@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 
-const ButtonComponent = ({ children, type, props, position, clickHandler }) => {
+const ButtonComponent = ({ children, type, value, position, clickHandler }) => {
   const buttonClasses = cn(
     "border-solid p-2 rounded-lg text-white " + position,
     {
@@ -14,7 +14,7 @@ const ButtonComponent = ({ children, type, props, position, clickHandler }) => {
       className={buttonClasses}
       onClick={(e) => {
         e.preventDefault();
-        clickHandler();
+        clickHandler(value);
       }}
     >
       {children}
