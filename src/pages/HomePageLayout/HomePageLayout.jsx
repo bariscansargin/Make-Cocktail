@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
-const HomePageLayout = () => {
+const PageLayout = () => {
   return (
     <Fragment>
       <Navbar />
@@ -13,4 +13,4 @@ const HomePageLayout = () => {
   );
 };
 
-export default HomePageLayout;
+export default PageLayout;
