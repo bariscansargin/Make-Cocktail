@@ -1,5 +1,6 @@
 import React from "react";
 import CardWrapper from "../CardWrapper/CardWrapper";
+import { Link } from "react-router-dom";
 
 function arraySelector(tableType, knownArray, unknownArray) {
   if (tableType === "known") {
@@ -8,7 +9,11 @@ function arraySelector(tableType, knownArray, unknownArray) {
     });
   }
   return unknownArray.map((cocktail, idx) => {
-    return <li key={idx}>{cocktail.strDrink}</li>;
+    return (
+      <li key={idx} className="hover:text-red-400">
+        <Link to={`/cocktails/${cocktail.idDrink}`}>{cocktail.strDrink}</Link>
+      </li>
+    );
   });
 }
 const ResultCard = ({

@@ -92,6 +92,7 @@ const InfoPage = () => {
             result: unknownCocktails.length,
             total: knownCocktails.length + unknownCocktails.length,
           }}
+          tableType={"unknown"}
         />
       </div>
 

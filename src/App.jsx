@@ -4,13 +4,17 @@ import "./App.css";
 import PageLayout from "./pages/HomePageLayout/HomePageLayout";
 import InfoPage from "./pages/InfoPage/InfoPage";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
+import SingleCoctailPage from "./pages/SingleCoctailPage/SingleCoctailPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PageLayout />,
-    errorElement: <ErrorPage/>,
-    children: [{ path: "/", element: <InfoPage /> }],
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <InfoPage /> },
+      { path: "/cocktails/:cocktailId", element: <SingleCoctailPage /> },
+    ],
   },
 ]);
 
