@@ -10,7 +10,7 @@ function arraySelector(tableType, knownArray, unknownArray) {
   }
   return unknownArray.map((cocktail, idx) => {
     return (
-      <li key={idx} className="hover:text-red-400">
+      <li key={idx} className="hover:text-red-400 hover:scale-75">
         <Link to={`/cocktails/${cocktail.idDrink}`}>{cocktail.strDrink}</Link>
       </li>
     );

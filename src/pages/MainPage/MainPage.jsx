@@ -16,7 +16,7 @@ import ResultCard from "../../components/ResultCard/ResultCard";
 //Emojis
 const emoji = String.fromCodePoint(0x1f60a);
 
-const InfoPage = () => {
+const MainPage = () => {
   const dispatch = useDispatch();
   const { knownCocktails, unknownCocktails } = useSelector(
     (state) => state.users
@@ -112,4 +112,4 @@ const InfoPage = () => {
   );
 };
 
-export default InfoPage;
+export default MainPage;

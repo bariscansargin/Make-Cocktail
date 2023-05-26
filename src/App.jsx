@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 //Pages
 import PageLayout from "./pages/HomePageLayout/HomePageLayout";
-import InfoPage from "./pages/InfoPage/InfoPage";
+import MainPage from "./pages/MainPage/MainPage";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import SingleCoctailPage from "./pages/SingleCoctailPage/SingleCoctailPage";
 
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     element: <PageLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <InfoPage /> },
+      { path: "/", element: <MainPage /> },
       { path: "/cocktails/:cocktailId", element: <SingleCoctailPage /> },
     ],
   },
