@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryParams } from "../../utils/util-functions";
+import { useNavigate } from "react-router-dom";
 //Utils
 import { shuffleArray } from "../../utils/util-functions";
 
@@ -10,6 +11,7 @@ import ButtonComponent from "../../components/Button/ButtonComponent";
 import CocktailLinkCard from "../../components/CocktailLink/CocktailLinkCard";
 
 const CocktailsPage = () => {
+  const navigate = useNavigate();
   const { filter } = useQueryParams();
 
   const apiEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${filter}`;
@@ -25,7 +27,7 @@ const CocktailsPage = () => {
     if (filter) {
       const res = await axios.get(apiEndpoint);
       console.log("Filter var.");
-      return res.data;
+      return res.data.drinks;
     }
     const res = await Promise.all([alcoholicReq, nonAlcoholicReq]);
     const cocktailsArr = [];
@@ -41,7 +43,7 @@ const CocktailsPage = () => {
     }
   }
   function filterHandler(value) {
-    console.log(value);
+    navigate(`/cocktails?filter=${value}`);
   }
   const cocktailsQuery = useQuery({
     queryKey: ["fetchCocktail", filter],
@@ -50,6 +52,7 @@ const CocktailsPage = () => {
 
   return (
     <main className="flex flex-col p-24 items-center justify-center">
+      {console.log(cocktailsQuery.data)}
       {cocktailsQuery.isLoading && <h1>Loading...</h1>}
       <div className="flex items-center justify-center">
         <ButtonComponent
