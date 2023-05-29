@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../redux/reducers/user";
@@ -17,6 +17,7 @@ import ResultCard from "../../components/ResultCard/ResultCard";
 const emoji = String.fromCodePoint(0x1f60a);
 
 const MainPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { knownCocktails, unknownCocktails } = useSelector(
     (state) => state.users
@@ -41,6 +42,9 @@ const MainPage = () => {
     } else {
       dispatch(userActions.incrementUnknownCocktails({ idDrink, strDrink }));
     }
+  }
+  function navHandler(value) {
+    navigate("/cocktails?filter=" + value);
   }
   const randomCocktailQuery = useQuery({
     queryKey: ["random-cocktail"],
@@ -99,14 +103,22 @@ const MainPage = () => {
       <p> If you want you can filter cocktails here {emoji}</p>
 
       <div className="flex mt-6 mb-16">
-        <Link>
-          <ButtonComponent type={"green"}>Alcoholic</ButtonComponent>
-        </Link>
-        <Link>
-          <ButtonComponent type={"red"} position="ml-4">
-            Non-Alcoholic
-          </ButtonComponent>
-        </Link>
+        <ButtonComponent
+          type={"green"}
+          clickHandler={navHandler}
+          value={"Alcoholic"}
+        >
+          Alcoholic
+        </ButtonComponent>
+
+        <ButtonComponent
+          type={"red"}
+          position="ml-4"
+          clickHandler={navHandler}
+          value={"Non_Alcoholic"}
+        >
+          Non-Alcoholic
+        </ButtonComponent>
       </div>
     </main>
   );
