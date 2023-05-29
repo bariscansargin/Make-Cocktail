@@ -6,6 +6,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import SingleCoctailPage from "./pages/SingleCoctailPage/SingleCoctailPage";
 import SingleIngredientPage from "./pages/SingleIngredientPage/SingleIngredientPage";
+import CocktailsPage from "./pages/CocktailsPage/CocktailsPage";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <MainPage /> },
+      { path: "/cocktails", element: <CocktailsPage /> },
       { path: "/cocktails/:cocktailId", element: <SingleCoctailPage /> },
+        
       {
         path: "/ingredients/:ingredientName",
         element: <SingleIngredientPage />,

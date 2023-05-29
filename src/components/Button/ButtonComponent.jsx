@@ -9,6 +9,7 @@ const ButtonComponent = ({ children, type, value, position, clickHandler }) => {
       "bg-red-600 hover:bg-red-500": type === "red",
     }
   );
+
   return (
     <button
       className={buttonClasses}
