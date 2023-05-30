@@ -15,3 +15,18 @@ export const shuffleArray = (array) => {
   }
   return array;
 };
+
+export const truncatedText = (str) => {
+  return str.substring(0, 30);
+};
+
+export const truncatedParagraph = (str) => {
+  return str.substring(0, 615);
+};
+
+export const isAlcoholic = (str) => {
+  if (str === "Yes") {
+    return "Alcoholic";
+  }
+  return "Non Alcoholic";
+};

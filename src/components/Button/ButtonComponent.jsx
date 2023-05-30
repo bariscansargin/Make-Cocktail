@@ -7,6 +7,9 @@ const ButtonComponent = ({ children, type, value, position, clickHandler }) => {
     {
       "bg-green-900 hover:bg-green-800": type === "green",
       "bg-red-600 hover:bg-red-500": type === "red",
+      "bg-cyan-500 hover:bg-cyan-400": type === "cyan",
+      "bg-blue-500 hover:bg-blue-400 shadow-xl":
+        type === "search",
     }
   );
 
@@ -17,6 +20,7 @@ const ButtonComponent = ({ children, type, value, position, clickHandler }) => {
         e.preventDefault();
         clickHandler(value);
       }}
+     
     >
       {children}
     </button>
