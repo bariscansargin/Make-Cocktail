@@ -30,3 +30,11 @@ export const isAlcoholic = (str) => {
   }
   return "Non Alcoholic";
 };
+
+export const hasDescription = (description, state) => {
+  if (description) {
+    return state ? description : truncatedParagraph(description) + " ";
+  }
+  return <p className="text-xl text-red-800 italic">No description.</p>
+};
+

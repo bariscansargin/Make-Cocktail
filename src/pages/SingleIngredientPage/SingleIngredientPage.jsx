@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -6,11 +6,17 @@ import { useQuery } from "@tanstack/react-query";
 import { isAlcoholic } from "../../utils/util-functions";
 import { truncatedParagraph } from "../../utils/util-functions";
 import CocktailLinkCard from "../../components/CocktailLink/CocktailLinkCard";
+import { hasDescription } from "../../utils/util-functions";
+
 //Components
 
 const SingleIngredientPage = () => {
   const { ingredientName } = useParams();
   const [allParagraph, setAllParagraph] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const ingredientReq = axios.get(
     `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredientName}`
   );
@@ -50,8 +56,10 @@ const SingleIngredientPage = () => {
       {fetchIngredient.data && (
         <div className="flex flex-col items-center justify-center">
           <p className=" font-bold italic font-xl text-pink-500 text-2xl mb-12">
-            {fetchIngredient.data[0].strIngredient} (
-            {isAlcoholic(fetchIngredient.data[0].strAlcohol)})
+            {fetchIngredient.data[0].strIngredient
+              ? fetchIngredient.data[0].strIngredient
+              : ""}{" "}
+            ({isAlcoholic(fetchIngredient.data[0].strAlcohol)})
           </p>
           <img
             src={`https://www.thecocktaildb.com/images/ingredients/${fetchIngredient.data[0].strIngredient}-Medium.png`}
@@ -59,11 +67,39 @@ const SingleIngredientPage = () => {
             className="w-48 h-48"
           />
           <div className="p-16">
-            {allParagraph
+            {hasDescription(
+              fetchIngredient.data[0].strDescription,
+              allParagraph
+            )}
+            {fetchIngredient.data[0].strDescription && (
+              <>
+                {allParagraph ? (
+                  <span
+                    className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
+                    data-value="less"
+                    onClick={toggleParagraphHandler}
+                  >
+                    ...Less
+                  </span>
+                ) : (
+                  <span
+                    className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
+                    data-value="more"
+                    onClick={toggleParagraphHandler}
+                  >
+                    ...More
+                  </span>
+                )}
+              </>
+            )}
+
+            {/* {
+            allParagraph
               ? fetchIngredient.data[0].strDescription
               : truncatedParagraph(fetchIngredient.data[0].strDescription) +
-                " "}
-            {allParagraph ? (
+                " " }
+
+            {fetchIngredient.data[0].strDescription && allParagraph ? (
               <span
                 className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
                 data-value="less"
@@ -79,7 +115,7 @@ const SingleIngredientPage = () => {
               >
                 ...More
               </span>
-            )}
+            )} */}
           </div>
         </div>
       )}
