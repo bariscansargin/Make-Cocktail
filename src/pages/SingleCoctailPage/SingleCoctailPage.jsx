@@ -41,9 +41,11 @@ const SingleCoctailPage = () => {
       {cocktailQueryById.isLoading && <p className="text-center">Loading...</p>}
       {cocktailQueryById.data && (
         <div className="flex flex-col items-center justify-center">
-          <p className="mb-4 text-pink-700 text-2xl italic">
-            {cocktailQueryById.data.drinks[0].strDrink}(
-            {cocktailQueryById.data.drinks[0].strAlcoholic})
+          <p className="text-pink-700 text-2xl italic text-center w-1/2">
+            {cocktailQueryById.data.drinks[0].strDrink}
+          </p>
+          <p className="mb-6 text-pink-700 text-2xl italic text-center">
+            ({cocktailQueryById.data.drinks[0].strAlcoholic})
           </p>
           <img
             src={cocktailQueryById.data.drinks[0].strDrinkThumb}
@@ -53,37 +55,46 @@ const SingleCoctailPage = () => {
           <p className="text-center text-xl text-pink-700 italic mb-4">
             {cocktailQueryById.data.drinks[0].strCategory}
           </p>
-          <div className="flex items-center justify-center px-40">
-            <p className="text-l text-pink-900 mb-4 ">
-              {cocktailQueryById.data.drinks[0].strInstructions}
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center justify-around p-12 ">
-            <div className="flex justify-between w-[500px] mb-4 flex-col">
-              <p className="bg-pink-700 opacity-1 text-white rounded-xl p-1.5">
+          <p className="text-l text-pink-900 mb-4 p-2 text-start">
+            {cocktailQueryById.data.drinks[0].strInstructions}
+          </p>
+          <div className="flex items-center justify-center mb-12">
+            <div className="flex items-start flex-col">
+              <p className="bg-pink-700 text-white rounded-xl p-2 mb-4">
                 Ingredients
               </p>
-              <p className="bg-pink-700 opacity-1 text-white rounded-xl p-1.5">
+              <div className="flex flex-col items-start">
+                {findIngredients(cocktailQueryById.data.drinks[0]) &&
+                  findIngredients(cocktailQueryById.data.drinks[0]).map(
+                    (data, idx) => {
+                      return (
+                        <Link to={`/ingredients/${data.ingredient}`} key={idx}>
+                          <p className="text-md hover:text-pink-700">
+                            - {data.ingredient}
+                          </p>
+                        </Link>
+                      );
+                    }
+                  )}
+              </div>
+            </div>
+            <div className="flex items-start flex-col ml-4 md:ml-32 lg:ml-64">
+              <p className="bg-pink-700 text-white rounded-xl p-2 mb-4">
                 Measures
               </p>
-            </div>
-
-            {findIngredients(cocktailQueryById.data.drinks[0]) &&
-              findIngredients(cocktailQueryById.data.drinks[0]).map(
-                (data, idx) => {
-                  return (
-                    <div className="flex flex-col justify-between w-[500px] " key={idx}>
-                      <Link to={`/ingredients/${data.ingredient}`}>
-                        <p className="text-lg ml-2 hover:text-pink-700">
-                          {data.ingredient}
+              <div className="flex flex-col items-start">
+                {findIngredients(cocktailQueryById.data.drinks[0]) &&
+                  findIngredients(cocktailQueryById.data.drinks[0]).map(
+                    (data, idx) => {
+                      return (
+                        <p key={idx}>
+                          <p className="text-md">- {data.measure}</p>
                         </p>
-                      </Link>
-                      <p className="italic text-lg mr-2">{data.measure}</p>
-                    </div>
-                  );
-                }
-              )}
+                      );
+                    }
+                  )}
+              </div>
+            </div>
           </div>
         </div>
       )}
