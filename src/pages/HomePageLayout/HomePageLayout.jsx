@@ -5,11 +5,11 @@ import Footer from "../../components/Footer/Footer";
 
 const PageLayout = () => {
   return (
-    <Fragment>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <Outlet />
       <Footer />
-    </Fragment>
+    </div>
   );
 };
 
