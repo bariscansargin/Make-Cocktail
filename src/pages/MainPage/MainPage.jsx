@@ -100,7 +100,7 @@ const MainPage = () => {
         />
       </div>
 
-      <p> If you want you can filter cocktails here {emoji}</p>
+      <p> You can filter cocktails here {emoji}</p>
 
       <div className="flex mt-6 mb-16">
         <ButtonComponent
