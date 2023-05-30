@@ -63,7 +63,7 @@ const IngredientsPage = () => {
           </div>
         )}
         {ingredientData.data && ingredientData.data[0] && (
-          <div>
+          <div className="text-center p-4">
             <Link to={`/ingredients/${ingredientData.data[0].strIngredient}`} className="text-pink-600 italic font-bold">
               You can see everything about{" "}
               {ingredientData.data[0].strIngredient} by clicking here

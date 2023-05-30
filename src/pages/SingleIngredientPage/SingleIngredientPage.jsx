@@ -37,10 +37,9 @@ const SingleIngredientPage = () => {
     }
   }
   function toggleParagraphHandler(e) {
-    const { value } = e.target.dataset;
-    if (value === "more") {
-      setAllParagraph(true);
-      return;
+    const target = e.target.getAttribute("data-value");
+    if (target === "more") {
+      return setAllParagraph(true);
     }
     setAllParagraph(false);
   }
@@ -73,49 +72,15 @@ const SingleIngredientPage = () => {
             )}
             {fetchIngredient.data[0].strDescription && (
               <>
-                {allParagraph ? (
-                  <span
-                    className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
-                    data-value="less"
-                    onClick={toggleParagraphHandler}
-                  >
-                    ...Less
-                  </span>
-                ) : (
-                  <span
-                    className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
-                    data-value="more"
-                    onClick={toggleParagraphHandler}
-                  >
-                    ...More
-                  </span>
-                )}
+                <span
+                  className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
+                  onClick={toggleParagraphHandler}
+                  data-value={allParagraph ? "less" : "more"}
+                >
+                  {allParagraph ? " ...Less" : " ...More"}
+                </span>
               </>
             )}
-
-            {/* {
-            allParagraph
-              ? fetchIngredient.data[0].strDescription
-              : truncatedParagraph(fetchIngredient.data[0].strDescription) +
-                " " }
-
-            {fetchIngredient.data[0].strDescription && allParagraph ? (
-              <span
-                className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
-                data-value="less"
-                onClick={toggleParagraphHandler}
-              >
-                ...Less
-              </span>
-            ) : (
-              <span
-                className="text-bold italic text-pink-600 hover:text-pink-400 cursor-pointer"
-                data-value="more"
-                onClick={toggleParagraphHandler}
-              >
-                ...More
-              </span>
-            )} */}
           </div>
         </div>
       )}

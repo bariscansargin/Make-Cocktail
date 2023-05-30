@@ -53,14 +53,14 @@ const SingleCoctailPage = () => {
           <p className="text-center text-xl text-pink-700 italic mb-4">
             {cocktailQueryById.data.drinks[0].strCategory}
           </p>
-          <div className="flex items-center justify-center px-64 ">
-            <p className="text-l text-pink-900 mb-4 text-center">
+          <div className="flex items-center justify-center px-40">
+            <p className="text-l text-pink-900 mb-4 ">
               {cocktailQueryById.data.drinks[0].strInstructions}
             </p>
           </div>
 
           <div className="flex flex-col items-center justify-around p-12 ">
-            <div className="flex justify-between w-[500px] mb-4">
+            <div className="flex justify-between w-[500px] mb-4 flex-col">
               <p className="bg-pink-700 opacity-1 text-white rounded-xl p-1.5">
                 Ingredients
               </p>
@@ -73,7 +73,7 @@ const SingleCoctailPage = () => {
               findIngredients(cocktailQueryById.data.drinks[0]).map(
                 (data, idx) => {
                   return (
-                    <div className="flex justify-between w-[500px] " key={idx}>
+                    <div className="flex flex-col justify-between w-[500px] " key={idx}>
                       <Link to={`/ingredients/${data.ingredient}`}>
                         <p className="text-lg ml-2 hover:text-pink-700">
                           {data.ingredient}

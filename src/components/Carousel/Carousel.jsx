@@ -1,44 +1,50 @@
 import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Slider from "react-slick";
+import cocktailCarouselPhotos from "../../utils/get-photo-array";
 
-const CarouselComponent = ({ photoArray }) => {
+const RandomCarousel = () => {
+  const settings = {
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="flex justify-center items-center w-2/3 h-auto mt-32 mb-16 rounded-md">
-      <Carousel
-        showArrows={true}
-        showIndicators={false}
-        infiniteLoop={true}
-        showThumbs={false}
-        autoPlay={true}
-        interval={3000}
-        transitionTime={500}
-        showStatus={false}
-      >
-        {photoArray.map((photoUrl, idx) => {
-          return (
-            <div key={idx} className="flex">
-              <img
-                src={photoUrl[0]}
-                alt="Carousel 1"
-                className="w-auto h-72 rounded-lg ml-2 mr-2"
-              />
-              <img
-                src={photoUrl[1]}
-                alt="Carousel 1"
-                className="w-auto h-72 rounded-lg ml-2 mr-2"
-              />
-              <img
-                src={photoUrl[2]}
-                alt="Carousel 1"
-                className="w-auto h-72 rounded-lg ml-2 mr-2"
-              />
-            </div>
-          );
-        })}
-      </Carousel>
+    <div className="w-1/2 mb-12">
+      <Slider {...settings}>
+        {cocktailCarouselPhotos.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt={`Slide ${index + 1}`} />
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
 
-export default CarouselComponent;
+export default RandomCarousel;

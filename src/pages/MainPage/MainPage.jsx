@@ -61,16 +61,16 @@ const MainPage = () => {
         website.
       </h2>
 
-      <h3 className="text-md">
+      <h3 className="text-md px-4 text-center mb-12">
         You can learn how to make cocktail in this website.{" "}
       </h3>
 
       <Carousel photoArray={cocktailCarouselPhotos} />
-      <p className="italic text-teal-900 mb-24">
+      <p className="italic text-teal-900 mb-12 text-center ">
         Only a few the cocktails you can learn to make !
       </p>
 
-      <div className="flex">
+      <div className="flex flex-col items-center justify-center lg:flex-row">
         <ResultCard
           title={"Known Cocktails"}
           tableType={"known"}

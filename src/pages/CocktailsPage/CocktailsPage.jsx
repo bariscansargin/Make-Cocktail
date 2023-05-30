@@ -66,12 +66,13 @@ const CocktailsPage = () => {
   });
 
   return (
-    <main className="flex flex-grow flex-col p-24 items-center justify-center">
-      <div className="flex items-center justify-center">
+    <main className="flex flex-grow flex-col p-8 items-center justify-center">
+      <div className="flex items-center justify-center flex-col md:flex-row">
         <ButtonComponent
           value={"Alcoholic"}
           type={"green"}
           clickHandler={filterHandler}
+          position={"mb-4 mr-4"}
         >
           Alcoholic
         </ButtonComponent>
@@ -79,7 +80,7 @@ const CocktailsPage = () => {
           value={"Non_Alcoholic"}
           type={"red"}
           clickHandler={filterHandler}
-          position={"ml-12 mr-12"}
+          position={"mb-4 mr-4"}
         >
           Non-Alcoholic
         </ButtonComponent>
@@ -87,17 +88,18 @@ const CocktailsPage = () => {
           clickHandler={filterHandler}
           value={"all"}
           type={"cyan"}
+          position={"mb-4 mr-4"}
         >
           See All
         </ButtonComponent>
       </div>
 
-      <h1 className="mt-8 font-bold italic text-pink-600 ">{infoMessage}</h1>
+      <h1 className="mt-8 font-bold italic text-pink-600 mb-4 ">{infoMessage}</h1>
       {cocktailsQuery.isLoading && (
         <h1 className="mt-4 font-thin italic text-pink-700">Loading...</h1>
       )}
 
-      <div className="flex flex-wrap p-12 items-center justify-center">
+      <div className="flex flex-wrap items-center justify-center">
         {cocktailsQuery.data &&
           cocktailsQuery.data.map((cocktail, idx) => {
             return <CocktailLinkCard cocktail={cocktail} key={idx} />;
