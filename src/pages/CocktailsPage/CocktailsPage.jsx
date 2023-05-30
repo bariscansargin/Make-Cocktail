@@ -22,38 +22,51 @@ const CocktailsPage = () => {
   const nonAlcoholicReq = axios.get(
     "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
   );
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   async function fetchCocktails() {
     if (filter) {
       const res = await axios.get(apiEndpoint);
-      console.log("Filter var.");
+      infoMessage = `${filter} cocktails.`;
       return res.data.drinks;
     }
     const res = await Promise.all([alcoholicReq, nonAlcoholicReq]);
-    const cocktailsArr = [];
+    let cocktailsArr = [];
     if (res[0].status === 200 && res[1].status === 200) {
       res[0].data.drinks.map((alcoholicDrink) => {
-        cocktailsArr.push(alcoholicDrink);
+        cocktailsArr = [...cocktailsArr, alcoholicDrink];
       });
       res[1].data.drinks.map((nonALcoholicDrink) => {
-        cocktailsArr.push(nonALcoholicDrink);
+        cocktailsArr = [...cocktailsArr, nonALcoholicDrink];
       });
 
       return shuffleArray(cocktailsArr);
     }
   }
   function filterHandler(value) {
-    navigate(`/cocktails?filter=${value}`);
+    if (value !== "all") {
+      navigate(`/cocktails?filter=${value}`);
+    } else {
+      navigate("/cocktails");
+    }
   }
+  let infoMessage = "All Cocktails";
+  if (filter === "Non_Alcoholic") {
+    infoMessage = "Non Alcoholic Cocktails";
+  }
+  if (filter === "Alcoholic") {
+    infoMessage = "Alcoholic Cocktails";
+  }
+
   const cocktailsQuery = useQuery({
     queryKey: ["fetchCocktail", filter],
     queryFn: fetchCocktails,
   });
 
   return (
-    <main className="flex flex-col p-24 items-center justify-center">
-      {console.log(cocktailsQuery.data)}
-      {cocktailsQuery.isLoading && <h1>Loading...</h1>}
+    <main className="flex flex-grow flex-col p-24 items-center justify-center">
       <div className="flex items-center justify-center">
         <ButtonComponent
           value={"Alcoholic"}
@@ -66,11 +79,23 @@ const CocktailsPage = () => {
           value={"Non_Alcoholic"}
           type={"red"}
           clickHandler={filterHandler}
-          position={"ml-24"}
+          position={"ml-12 mr-12"}
         >
           Non-Alcoholic
         </ButtonComponent>
+        <ButtonComponent
+          clickHandler={filterHandler}
+          value={"all"}
+          type={"cyan"}
+        >
+          See All
+        </ButtonComponent>
       </div>
+
+      <h1 className="mt-8 font-bold italic text-pink-600 ">{infoMessage}</h1>
+      {cocktailsQuery.isLoading && (
+        <h1 className="mt-4 font-thin italic text-pink-700">Loading...</h1>
+      )}
 
       <div className="flex flex-wrap p-12 items-center justify-center">
         {cocktailsQuery.data &&
