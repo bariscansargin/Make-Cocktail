@@ -55,7 +55,7 @@ const SingleCoctailPage = () => {
           <p className="text-center text-xl text-pink-700 italic mb-4">
             {cocktailQueryById.data.drinks[0].strCategory}
           </p>
-          <p className="text-l text-pink-900 mb-4 p-2 text-start">
+          <p className="text-l text-pink-900 mb-4 p-8 text-start lg:text-xl">
             {cocktailQueryById.data.drinks[0].strInstructions}
           </p>
           <div className="flex items-center justify-center mb-12">
