@@ -25,8 +25,8 @@ const ResultCard = ({
 }) => {
   return (
     <CardWrapper>
-      <div className="flex flex-col scrollbar">
-        <p>{title}</p>
+      <div className="flex flex-col scrollbar items-center">
+        <p className="text-center">{title}</p>
         <p className="text-center">
           {coctails.result}/{coctails.total}
         </p>
