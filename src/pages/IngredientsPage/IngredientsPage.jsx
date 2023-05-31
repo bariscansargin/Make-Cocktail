@@ -41,7 +41,9 @@ const IngredientsPage = () => {
       </div>
       <div>
         {ingredientData.isLoading && (
-          <p className="text-cyan-500">Loading...</p>
+          <div class="items-center justify-center rounded-full w-14 h-14 bg-gradient-to-tr from-cyan-500 to-pink-500">
+            <div class="h-9 w-9 rounded-full bg-gray-200"></div>
+          </div>
         )}
       </div>
       <div className="flex flex-col justify-center items-center">
@@ -64,7 +66,10 @@ const IngredientsPage = () => {
         )}
         {ingredientData.data && ingredientData.data[0] && (
           <div className="text-center p-4">
-            <Link to={`/ingredients/${ingredientData.data[0].strIngredient}`} className="text-pink-600 italic font-bold">
+            <Link
+              to={`/ingredients/${ingredientData.data[0].strIngredient}`}
+              className="text-pink-600 italic font-bold"
+            >
               You can see everything about{" "}
               {ingredientData.data[0].strIngredient} by clicking here
             </Link>

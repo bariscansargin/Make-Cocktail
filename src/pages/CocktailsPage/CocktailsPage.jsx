@@ -94,9 +94,13 @@ const CocktailsPage = () => {
         </ButtonComponent>
       </div>
 
-      <h1 className="mt-8 font-bold italic text-pink-600 mb-8 ">{infoMessage}</h1>
+      <h1 className="mt-8 font-bold italic text-pink-600 mb-8 ">
+        {infoMessage}
+      </h1>
       {cocktailsQuery.isLoading && (
-        <h1 className="mt-4 font-thin italic text-pink-700">Loading...</h1>
+        <div class="items-center justify-center rounded-full w-14 h-14 bg-gradient-to-tr from-cyan-500 to-pink-500">
+          <div class="h-9 w-9 rounded-full bg-gray-200"></div>
+        </div>
       )}
 
       <div className="flex flex-wrap items-center justify-center">
