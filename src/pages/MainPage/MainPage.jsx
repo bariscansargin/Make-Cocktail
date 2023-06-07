@@ -62,7 +62,7 @@ const MainPage = () => {
       </h2>
 
       <h3 className="text-md px-4 text-center mb-12">
-        You can learn how to make cocktail in this website.{" "}
+        You can learn how to make cocktail in this app.{" "}
       </h3>
 
       <Carousel photoArray={cocktailCarouselPhotos} />
