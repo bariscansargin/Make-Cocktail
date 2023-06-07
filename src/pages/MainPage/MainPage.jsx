@@ -58,7 +58,7 @@ const MainPage = () => {
         <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-pink-400 to-red-600 tracking-[.5rem]">
           MAKE COCKTAIL
         </span>{" "}
-        website.
+        app.
       </h2>
 
       <h3 className="text-md px-4 text-center mb-12">
