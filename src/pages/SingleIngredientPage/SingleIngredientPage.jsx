@@ -54,10 +54,12 @@ const SingleIngredientPage = () => {
 
       {fetchIngredient.data && (
         <div className="flex flex-col items-center justify-center">
-          <p className=" font-bold italic font-xl text-pink-500 text-2xl mb-12">
+          <p className=" font-bold italic font-xl text-pink-500 text-2xl mb-2 ">
             {fetchIngredient.data[0].strIngredient
               ? fetchIngredient.data[0].strIngredient
-              : ""}{" "}
+              : ""}
+          </p>
+          <p className="font-bold italic font-xl text-pink-500 text-m mb-12 ">
             ({isAlcoholic(fetchIngredient.data[0].strAlcohol)})
           </p>
           <img

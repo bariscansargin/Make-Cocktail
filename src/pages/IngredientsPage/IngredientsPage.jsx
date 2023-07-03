@@ -55,7 +55,7 @@ const IngredientsPage = () => {
               className="w-48 h-48 mb-4 "
             />
             <div>
-              <p className="italic font-bold ">
+              <p className="italic font-bold">
                 {ingredientData.data[0].strIngredient}
                 {ingredientData.data[0].strAlcohol === "Yes"
                   ? "(Alcohol)"
